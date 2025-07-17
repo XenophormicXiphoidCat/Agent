@@ -1,8 +1,112 @@
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelBlaze Chat</title>
 
-	createChat({
-		webhookUrl: 'https://xxc.app.n8n.cloud/webhook/cc9181f1-6d2f-4094-a059-b1925e02d877/chat'
-	});
-</script>
+  <!-- Default n8n chat styles -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <!-- Custom Modern UI Styles -->
+  <style>
+    /* Floating Button */
+    #custom-chat-launcher {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      background-color: #111827;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    #custom-chat-launcher:hover {
+      background-color: #1f2937;
+    }
+
+    #custom-chat-launcher img {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Chat Bubble Enhancements */
+    n8n-chat::part(message-bubble) {
+      border-radius: 20px !important;
+      padding: 12px 16px !important;
+      font-family: 'Segoe UI', sans-serif !important;
+      font-size: 15px;
+      line-height: 1.5;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    n8n-chat::part(message-bubble-user) {
+      background-color: #2563eb !important;
+      color: #fff !important;
+    }
+
+    n8n-chat::part(message-bubble-bot) {
+      background-color: #f3f4f6 !important;
+      color: #111827 !important;
+    }
+
+    /* Chat Window */
+    n8n-chat::part(chat-container) {
+      border-radius: 16px !important;
+      max-width: 420px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    n8n-chat::part(header) {
+      background: #111827 !important;
+      color: white !important;
+      font-weight: bold;
+    }
+
+    n8n-chat::part(input-area) {
+      border-top: 1px solid #e5e7eb !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Floating Chat Button -->
+  <div id="custom-chat-launcher">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/chat--v1.png" alt="Chat Icon" />
+  </div>
+
+  <!-- Chatbot Mount Point -->
+  <n8n-chat style="display: none;"></n8n-chat>
+
+  <!-- Chatbot Loader -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    const chat = createChat({
+      webhookUrl: 'https://xxc.app.n8n.cloud/webhook/cc9181f1-6d2f-4094-a059-b1925e02d877/chat',
+      theme: {
+        chatTitle: 'Blaze • PixelBlaze Studio',
+        chatSubTitle: 'Design help at your service 🎨',
+        accentColor: '#2563eb'
+      }
+    });
+
+    // Toggle chat visibility
+    const launcher = document.getElementById('custom-chat-launcher');
+    launcher.addEventListener('click', () => {
+      const chatElement = document.querySelector('n8n-chat');
+      const isOpen = chatElement.style.display === 'block';
+      chatElement.style.display = isOpen ? 'none' : 'block';
+    });
+  </script>
+
+</body>
+</html>
