@@ -3,75 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Modern Chat UI - PixelBlaze</title>
+  <title>PixelBlaze Studio Chatbot</title>
+
+  <!-- Load n8n Chat Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <!-- Custom UI Enhancements -->
   <style>
-    /* Floating Button */
-    #chat-launcher {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 60px;
-      height: 60px;
+    /* Floating Button Customization */
+    n8n-chat::part(launcher-button) {
       background-color: #2563eb;
-      border-radius: 50%;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
-    #chat-launcher img {
-      width: 28px;
-      height: 28px;
-    }
-
-    /* Chat iframe container */
-    #n8n-chat-frame {
-      position: fixed;
-      bottom: 100px;
-      right: 24px;
-      width: 400px;
-      height: 520px;
+    /* Chat Window Container */
+    n8n-chat::part(chat-container) {
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
       overflow: hidden;
-      display: none;
-      z-index: 999;
+      max-width: 400px;
+      font-family: 'Segoe UI', sans-serif;
     }
 
+    /* Header Styling */
+    n8n-chat::part(header) {
+      background-color: #111827;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 14px;
+    }
+
+    /* Message Bubbles */
+    n8n-chat::part(message-bubble) {
+      border-radius: 18px;
+      padding: 12px 16px;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    n8n-chat::part(message-bubble-user) {
+      background-color: #2563eb;
+      color: #fff;
+    }
+
+    n8n-chat::part(message-bubble-bot) {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    /* Input Area */
+    n8n-chat::part(input-area) {
+      border-top: 1px solid #e5e7eb;
+      padding: 12px;
+    }
+
+    /* Mobile Responsiveness */
     @media (max-width: 480px) {
-      #n8n-chat-frame {
+      n8n-chat::part(chat-container) {
         width: 100%;
         height: 100%;
-        right: 0;
-        bottom: 0;
         border-radius: 0;
       }
     }
   </style>
 </head>
+
 <body>
 
-<!-- Floating Chat Icon -->
-<div id="chat-launcher">
-  <img src="https://img.icons8.com/ios-filled/50/ffffff/chat--v1.png" alt="Chat" />
-</div>
+<!-- Mounts the n8n chatbot -->
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-<!-- Iframe with injected n8n chatbot -->
-<iframe id="n8n-chat-frame"
-  src="https://xxc.app.n8n.cloud/webhook/cc9181f1-6d2f-4094-a059-b1925e02d877/chat"
-  frameborder="0"
-  allow="clipboard-write; microphone;"
-></iframe>
-
-<script>
-  const launcher = document.getElementById('chat-launcher');
-  const chatFrame = document.getElementById('n8n-chat-frame');
-
-  launcher.addEventListener('click', () => {
-    chatFrame.style.display = chatFrame.style.display === 'block' ? 'none' : 'block';
+  createChat({
+    webhookUrl: 'https://xxc.app.n8n.cloud/webhook/cc9181f1-6d2f-4094-a059-b1925e02d877/chat',
+    theme: {
+      chatTitle: 'Blaze • PixelBlaze Studio',
+      chatSubTitle: 'Design help at your service 🎨',
+      accentColor: '#2563eb'
+    }
   });
 </script>
 
