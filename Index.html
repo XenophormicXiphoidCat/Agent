@@ -1,35 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PixelBlaze Chatbot</title>
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-</head>
-<body>
-
-<!-- The chatbot will automatically appear in the corner -->
-
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 <script type="module">
-  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-  createChat({
-    webhookUrl: 'https://xxc.app.n8n.cloud/webhook/cc9181f1-6d2f-4094-a059-b1925e02d877/chat',
-    initialMessages: [
-        content: "Hey! Blaze here from PixelBlaze Studio — what can I help you design today? 🎨⚡"
-      }
-    ],
-    // Optional: customize colors or appearance here
-    theme: {
-      color: "#ff4d00",         // Accent color
-      fontFamily: "Inter, sans-serif",
-      avatar: {
-        url: "https://i.imgur.com/7p9Wk0z.png", // Optional: Blaze's avatar
-        shape: "circle"
-      }
-    }
-  });
+	createChat({
+		webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL'
+	});
 </script>
-
-</body>
-</html>
